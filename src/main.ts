@@ -2,6 +2,7 @@ import Fastify, { FastifyReply, FastifyRequest } from 'fastify'
 import { config } from 'dotenv'
 import fastifyMySQL from '@fastify/mysql'
 import { rpzRoute } from './rpz.route'
+import { invalidHostRoute } from './invalid-host.route'
 import { rootRoute } from './root.route'
 
 config()
@@ -29,6 +30,7 @@ fastify.addHook('preValidation', async (request, reply) => {
 fastify.register(fastifyMySQL, { promise: true, connectionString: MYSQL_URL })
 
 fastify.register(rpzRoute, { prefix: '/noc/rpz' })
+fastify.register(invalidHostRoute, { prefix: '/noc/invalid-host' })
 fastify.register(rootRoute)
 
 fastify.listen({ port: +PORT }, (err) => {

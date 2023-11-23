@@ -22,7 +22,7 @@ const validateApiKey = async (request: FastifyRequest, reply: FastifyReply) => {
 const fastify = Fastify({ logger: true })
 
 fastify.addHook('preValidation', async (request, reply) => {
-  if (request.routerPath.startsWith('/noc/')) {
+  if (request.routeOptions.url.startsWith('/noc/')) {
     await validateApiKey(request, reply)
   }
 })

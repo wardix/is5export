@@ -42,7 +42,7 @@ export const invalidHostRoute = async (fastify: FastifyInstance) => {
       const ipPadding =
         ipLastPart.length == 1 ? '00' : ipLastPart.length == 2 ? '0' : ''
       const validHostIpPart = `${ipPadding}${ipLastPart}`
-      if (host.substring(2, 5) === validHostIpPart) {
+      if (host.substring(2, 5) !== validHostIpPart) {
         invalidHosts.push(
           `invalid_host{host="${host}",ip="${ip}",pop="${pop}"} 1`
         )
